@@ -107,7 +107,7 @@ Apify.main(async () => {
                 // Process detail page
                 
                 // Extract data
-                try{await page.waitFor('[itemprop="ratingCount"]');}
+                try{await page.waitForSelector('[itemprop="ratingCount"]');}
                 catch(e){console.log('No rating count found.');}
                 await Apify.utils.puppeteer.injectJQuery(page);
                 const myResult = await page.evaluate(extractData);
@@ -150,7 +150,7 @@ Apify.main(async () => {
                 // Process other pages
                 
                 // Enqueue company details
-                try{await page.waitFor(itemSelector);}
+                try{await page.waitForSelector(itemSelector);}
                 catch(e){console.log('No company detail links found.');}
                 const itemLinks = await page.$$(itemSelector);
                 for(const link of itemLinks){
@@ -159,7 +159,7 @@ Apify.main(async () => {
                 }
                 
                 // Enqueue sub-pages
-                try{await page.waitFor(pageSelector);}
+                try{await page.waitForSelector(pageSelector);}
                 catch(e){console.log('No sub-pages found.');}
                 const pageLinks = await page.$$(pageSelector);
                 for(const link of pageLinks){
